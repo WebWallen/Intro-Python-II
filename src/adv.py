@@ -1,4 +1,7 @@
+import random
 from room import Room
+from player import Player 
+from item import Item
 
 # Declare all the rooms
 
@@ -39,12 +42,27 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+daniel = Player("daniel", "outside")
+
 # Write a loop that:
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
+
+def get_user_choice(): 
+    choice = input("[n] north    [s] south   [e] east   [w] west    [q] quit\n")
+    return choice_options[choice] # Connected to choice_opions variable below with matching numbers
+
+choice_options = {
+    "n": "north",
+    "s": "south",
+    "e": "east",
+    "w": "west",
+    "q": "quit"
+}  
+
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
