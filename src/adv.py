@@ -47,10 +47,10 @@ item = {
     # Priting in every room versus specified room, all but two commented out until when/if debugged
     # 'knife': Item("Knife", "Weapon", "It won't help you in a shoot-out but could provide an unfair advantage in a fist fight."),
     # 'gun': Item("Gun", "Weapon", "The mafia is known to lurk our lands. If you run into them, this gun could save your life!"),
-    'rubber_chicken': Item("Rubber Chicken", "Weapon", "No other weapons? Throw this and hope it distracts your nemesis."),
+    'rubber_chicken': Item("rubber_chicken", "Weapon", "No other weapons? Throw this and hope it distracts your nemesis."),
     # 'bomb': Item("Bomb", "Weapon", "Trapped in a room full of zombies? Light the fuse and run away as fast as you can."),
     # 'nuke': Item("Nuke", "Weapon", "I don't recommend using this unless your only other option is torture by mafia..."),
-    'banana': Item("Banana", "Food", "Potassium is known to raise your strength and defenses by 5-10x."),
+    'banana': Item("banana", "Food", "Potassium is known to raise your strength and defenses by 5-10x."),
     # 'coffee': Item("Coffee", "Food", "I don't recommend falling asleep. Drink this to raise energy!"),
     # 'taco': Item("Taco", "Food", "The best nourishment available on the planet... nom to the nom!"),
     # 'liquor': Item("Liquor", "Food", "You might need this to cope with the existence of zombies."),
