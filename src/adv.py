@@ -1,4 +1,6 @@
+import textwrap
 import random
+
 from room import Room
 from player import Player 
 from item import Item
@@ -53,7 +55,7 @@ daniel = Player("daniel", "outside")
 
 def get_user_choice(): 
     choice = input("[n] north    [s] south   [e] east   [w] west    [q] quit\n")
-    return choice_options[choice] # Connected to choice_opions variable below with matching numbers
+    return choice_options[choice] # Connected to choice_opions variable below with matching characters
 
 choice_options = {
     "n": "north",
@@ -62,6 +64,19 @@ choice_options = {
     "w": "west",
     "q": "quit"
 }  
+
+# Give user clear instructions RE: game play
+
+welcome_message = "Hello, Player #1! You are outside. Where to? Choose a direction: North(n), South(s), East(e), or West(w). Press q to Quit."
+
+# Start Game
+
+def show_welcome_message():
+    print(welcome_message)
+
+# Connect user input to behavior described in function
+
+user_choice = get_user_choice()
 
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
