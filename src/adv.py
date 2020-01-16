@@ -70,7 +70,7 @@ def player_decision():
     show_location()
     move_player()
 
-# Need logic for fluid gameplay, go from 1 move to the next one
+# Need above logic for fluid gameplay, go from 1 move to the next one
 
 def move_player(): 
     choice_options = {
@@ -94,8 +94,11 @@ def move_player():
         print("That's not a valid choice. Please try again.")
         player_decision()
 
+# Notice player_decision is called whether their choice is valid or not. This function is what gives the player an ability to move either way.
+
 def change_rooms(choice): 
     link_choices = { 'n': 'n_to', 's': 's_to', 'e': 'e_to', 'w': 'w_to'}
+    # Connects directions inputted after prompt and directions the game allows you to move
     next_room = getattr(player.current_room, link_choices[choice])
 
     if not next_room:
