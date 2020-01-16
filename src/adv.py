@@ -45,29 +45,29 @@ player = Player("daniel", room["outside"])
 
 item = {
     'knife': Item("Knife", "Weapon", "It won't help you in a shoot-out but could provide an unfair advantage in a fist fight."),
-    'gun': Item("Gun", "Weapon", "The mafia is known to lurk our lands. If you run into them, this gun could save your life!"),
-    'rubber_chicken': Item("Rubber Chicken", "Weapon", "No other weapons? Throw this and hope it distracts your nemesis."),
-    'bomb': Item("Bomb", "Weapon", "Trapped in a room full of zombies? Light the fuse and run away as fast as you can."),
-    'nuke': Item("Nuke", "Weapon", "I don't recommend using this unless your only other option is torture by mafia..."),
-    'banana': Item("Banana", "Food", "Potassium is known to raise your strength and defenses by 5-10x."),
-    'coffee': Item("Coffee", "Food", "I don't recommend falling asleep. Drink this to raise energy!"),
-    'taco': Item("Taco", "Food", "The best nourishment available on the planet... nom to the nom!"),
-    'liquor': Item("Liquor", "Food", "You might need this to cope with the existence of zombies."),
+    # 'gun': Item("Gun", "Weapon", "The mafia is known to lurk our lands. If you run into them, this gun could save your life!"),
+    # 'rubber_chicken': Item("Rubber Chicken", "Weapon", "No other weapons? Throw this and hope it distracts your nemesis."),
+    # 'bomb': Item("Bomb", "Weapon", "Trapped in a room full of zombies? Light the fuse and run away as fast as you can."),
+    # 'nuke': Item("Nuke", "Weapon", "I don't recommend using this unless your only other option is torture by mafia..."),
+    # 'banana': Item("Banana", "Food", "Potassium is known to raise your strength and defenses by 5-10x."),
+    # 'coffee': Item("Coffee", "Food", "I don't recommend falling asleep. Drink this to raise energy!"),
+    # 'taco': Item("Taco", "Food", "The best nourishment available on the planet... nom to the nom!"),
+    # 'liquor': Item("Liquor", "Food", "You might need this to cope with the existence of zombies."),
     'corpse': Item("Corpse", "Food", "Cannibalism is wrong but it's here if you get desperate.")
 }
 
 # Add items to specific rooms so they may be accessed by player
 
-room['outside'].items.append(item['banana'])
-room['outside'].items.append(item['rubber_chicken'])
-room['foyer'].items.append(item['knife'])
-room['foyer'].items.append(item['coffee'])
-room['overlook'].items.append(item['gun'])
-room['overlook'].items.append(item['taco'])
-room['narrow'].items.append(item['bomb'])
-room['narrow'].items.append(item['liquor'])
-room['treasure'].items.append(item['nuke'])
-room['treasure'].items.append(item['corpse'])
+room['outside'].items.append(item['knife'])
+# room['outside'].items.append(item['rubber_chicken'])
+# room['foyer'].items.append(item['knife'])
+# room['foyer'].items.append(item['coffee'])
+# room['overlook'].items.append(item['gun'])
+# room['overlook'].items.append(item['taco'])
+# room['narrow'].items.append(item['bomb'])
+# room['narrow'].items.append(item['liquor'])
+# room['treasure'].items.append(item['nuke'])
+room['outside'].items.append(item['corpse'])
 
 def start_game():
     show_welcome_message()
@@ -91,7 +91,7 @@ def show_location():
 
 def input_action():
     show_location()
-    input_options()
+    input_decision()
 
 # Need above logic for fluid gameplay, go from 1 move to the next one
 
@@ -108,7 +108,7 @@ def print_options():
     input_decision()
 
 def input_decision():
-    input_message: '\n Now what? [type o to explore your options]'
+    input_message = '\n Now what? [type o to explore your options]'
     key = input(input_message).split(' ')
     input_options(key)
 
@@ -116,7 +116,7 @@ def wrong_input():
     print("That's not an option. Try again!")
     input_decision()
 
-def input_options(): 
+def input_options(input): 
     if len(input) == 1:
         key = input[0]
 
@@ -135,7 +135,7 @@ def input_options():
             input_action()
         elif key == 'i' or key == 'inventory':
             check_inventory()
-            input_options()
+            input_decision()
         elif key in directions.keys():
             print(f"You move {directions[key]}\n")
             # Surrounded in {} because it's a dictionary and must match variable sytax
@@ -185,7 +185,7 @@ def get_item(item_to_get):
         print(f"You're the proud new owner of a {item_to_get}!")
     else:
         print(f"Sorry, there's not a {item_to_get} in here.")
-    input_options()
+    input_decision()
 
 # Put item back
 
@@ -196,7 +196,7 @@ def drop_item(item_to_drop):
         print(f"Say goodbye to your {item_to_drop}!")
     else:
         print(f"Oops, you don't even have a {item_to_drop}.")
-    input_options()
+    input_decision()
 
 # Logic to quit game
 
