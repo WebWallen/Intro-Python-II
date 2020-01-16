@@ -1,5 +1,6 @@
 import textwrap
 import random
+import sys
 
 from room import Room
 from player import Player 
@@ -44,41 +45,70 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-daniel = Player("daniel", "outside")
+player = Player("daniel", room["outside"])
+# Above syntax required because rooms are defined within big object versus separate variables
 
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
+def start_game():
+    show_welcome_message()
+    move_player()
 
-def get_user_choice(): 
-    choice = input("[n] north    [s] south   [e] east   [w] west    [q] quit\n")
-    return choice_options[choice] # Connected to choice_opions variable below with matching characters
-
-choice_options = {
-    "n": "north",
-    "s": "south",
-    "e": "east",
-    "w": "west",
-    "q": "quit"
-}  
-
-# Give user clear instructions RE: game play
-
-welcome_message = "Hello, Player #1! You are outside. Where to? Choose a direction: North(n), South(s), East(e), or West(w). Press q to Quit."
-
-# Start Game
+# Welcome displays at beginning of every game
 
 def show_welcome_message():
+    welcome_message = "\n** Are You Ready for a Fun Adventure? **\n"
     print(welcome_message)
 
-# Connect user input to behavior described in function
+# Need unique/different message since move_player prints as well
 
-user_choice = get_user_choice()
+def show_location():
+    print('Your current location: ', player.current_room.name)
+    print(player.current_room.description, '\n')
 
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+# Establishes current room
+
+def player_decision():
+    show_location()
+    move_player()
+
+# Need logic for fluid gameplay, go from 1 move to the next one
+
+def move_player(): 
+    choice_options = {
+        "n": "north",
+        "s": "south",
+        "e": "east",
+        "w": "west",
+        "q": "quit"
+    }  
+
+    choice = input("Which direction shall you travel? [n] north    [s] south   [e] east   [w] west    [q] quit\n")
+
+    if choice == 'q':
+        quit_game()
+    elif choice in choice_options.keys():
+        print(f"You move {choice_options[choice]}\n")
+        # Surrounded in {} because it's a dictionary and must match variable sytax
+        change_rooms(choice)
+        player_decision()
+    else: 
+        print("That's not a valid choice. Please try again.")
+        player_decision()
+
+def change_rooms(choice): 
+    link_choices = { 'n': 'n_to', 's': 's_to', 'e': 'e_to', 'w': 'w_to'}
+    next_room = getattr(player.current_room, link_choices[choice])
+
+    if not next_room:
+        print("Sorry, you can't go that way. Please try again.")
+    else:
+        player.current_room = next_room
+
+# Logic to quit game
+
+def quit_game():
+    print("Thanks for playing! Come back soon.\n")
+    sys.exit()
+
+# Nothing happens unless you call function to initialize game settings
+
+start_game()
