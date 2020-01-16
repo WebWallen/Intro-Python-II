@@ -44,6 +44,7 @@ player = Player("daniel", room["outside"])
 # Define items that can be picked up with a name, category, and description
 
 item = {
+    # Priting in every room versus specified room, all but two commented out until when/if debugged
     # 'knife': Item("Knife", "Weapon", "It won't help you in a shoot-out but could provide an unfair advantage in a fist fight."),
     # 'gun': Item("Gun", "Weapon", "The mafia is known to lurk our lands. If you run into them, this gun could save your life!"),
     'rubber_chicken': Item("Rubber Chicken", "Weapon", "No other weapons? Throw this and hope it distracts your nemesis."),
