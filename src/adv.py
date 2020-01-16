@@ -39,14 +39,32 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-#
-# Main
-#
+# Above syntax required because rooms are defined within big object versus separate variables
 
 # Make a new player object that is currently in the 'outside' room.
 
 player = Player("daniel", room["outside"])
-# Above syntax required because rooms are defined within big object versus separate variables
+
+# Define items that can be picked up with a name, category, and description
+
+knife = Item("Knife", "Weapon", "It won't help you in a shoot-out but could provide an unfair advantage in a fist fight.")
+gun = Item("Gun", "Weapon", "The mafia is known to lurk our lands. If you run into them, this gun could save your life!")
+rubber_chicken = Item("Rubber Chicken", "Weapon", "No other weapons? Throw this and hope it distracts your nemesis.")
+bomb = Item("Bomb", "Weapon", "Trapped in a room full of zombies? Light the fuse and run away as fast as you can.")
+nuke = Item("Nuke", "Weapon", "I don't recommend using this unless your only other option is torture by mafia...")
+banana = Item("Banana", "Food", "Potassium is known to raise your strength and defenses by 5-10x.")
+coffee = Item("Coffee", "Food", "I don't recommend falling asleep. Drink this to raise energy!")
+taco = Item("Taco", "Food", "The best nourishment available on the planet... nom to the nom!")
+liquor = Item("Liquor", "Food", "You might need this to cope with the existence of zombies.")
+corpse = Item("Corpse", "Food", "Cannibalism is wrong but it's here if you get desperate.")
+
+# Add items to specific rooms so they may be accessed by player
+
+room['outside'].items.append(banana, rubber_chicken)
+room['foyer'].items.append(knife, coffee)
+room['overlook'].items.append(gun, taco)
+room['narrow'].items.append(bomb, liquor)
+room['treasure'].items.append(nuke, corpse)
 
 def start_game():
     show_welcome_message()
@@ -78,10 +96,12 @@ def move_player():
         "s": "south",
         "e": "east",
         "w": "west",
+        "i": "inventory",
+        "c": "check",
         "q": "quit"
     }  
 
-    choice = input("Which direction shall you travel? [n] north    [s] south   [e] east   [w] west    [q] quit\n")
+    choice = input("Which direction shall you travel? [n] north    [s] south   [e] east   [w] west    [q] quit\n Looking for items? Inspect your inventory with [i] or check the room for food and weapons with [c].")
 
     if choice == 'q':
         quit_game()
